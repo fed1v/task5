@@ -2,27 +2,22 @@ package com.example.task5
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val contactsProvider = ContactsProvider()
-        val bundle = Bundle()
-        bundle.putParcelable("contactsProvider", contactsProvider)
-        val contactsListFragment = ContactsListFragment()
-        contactsListFragment.arguments = bundle
 
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, contactsListFragment)
+                .replace(R.id.fragment_container, ContactsListFragment())
                 .commit()
         }
     }
-
 
     fun replaceFragments(fragment: Fragment, tag: String) {
         supportFragmentManager
